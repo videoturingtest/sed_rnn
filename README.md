@@ -40,7 +40,25 @@ The python script will read the audio data in the `audio_wav` folder and annoata
 The script will make prediction in the data then compare with the annotation to produce a table of accuracy, precision, recall,f1_score and intersection over union of each event type. 
 # Result 
 The above model is trained with audio data from 7 first episodes of Friends series then evaluated in the next 3 episodes. This data set is of high imbalance (10 classes, 3 dominant classes account more than 90% of the data). 
-Main metric to measure the performance is `f1_score`. 
+Main metric to measure the performance is `f1_score`.
+Every second in the testing files and prediction results is compared as multi-label classification. 
+# Result folder: prediction_results
+In this folder, there are only prediction results from episode 08 to 23 of the session 1 of Friends because the first 7 episodes are used as training data.
+The format of the prediction results is similar to format of the original annotation excepts the start time and end time for each event is changed to second only (original format is hh:mm:ss). Example of the result format 
+```
+{
+    "file_name": "s01_ep08.json",       //Name of the prediction file containing the season and episode number 
+    "sound_results": [
+        {
+            "start_time": 0,             // Start time at second, in the original annotation was hh:mm:ss 
+            "sound_type": "speaking",    // Label 
+            "end_time": 2.0              // End time at second
+        },
+        ...
+        ]
+}
+```
+The above example shows the output  of a "speaking" event starting at 0 second and stopping at 2.0 second. 
 
 |           | background music | speaking | background laughing |
 |-----------|------------------|----------|---------------------|
